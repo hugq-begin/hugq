@@ -37,7 +37,8 @@ Atom是github开发的开源跨平台的编辑器，拥有强大的编辑功能�
 ### - 基本语法
 ![Markdown基本语法图](3163394-6907e5a2dbcab143.png)
 ## 4. OpenVX相关资料
-[Khronos OpenVX Registry](https://www.khronos.org/registry/OpenVX/)
+- [Khronos OpenVX Registry](https://www.khronos.org/registry/OpenVX/)
+- [Khronos OpenVX Tutorial Material](https://github.com/rgiduthuri/openvx_tutorial/wiki)
 
 # 2019年8月13日
 近两日学习总结如下：
@@ -46,6 +47,59 @@ mysql数据库的学习，包括软件安装、语法、与第三方软件关联
 ## 2. vs code
 vscode编辑器的使用，包括环境配置、与git关联等。参考文献：laymen->YUSUR-RD-R-20180827-V2.0-开发环境使用教程.pdf，https://blog.csdn.net/sesiria/article/details/78945076 等。
 ## 3. c++
+### - 命名空间
+命名空间可作为附加信息来区分不同库中相同名称的函数、类、变量等。使用了命名空间即定义了上下文。本质上，命名空间就是定义了一个范围。
+- 定义命名空间：`namespace namespace_name{/*代码*/}`
+- 调用形式：
+```c
+#include<iostream>
+using namespce std;
+namespace first_space{
+    void fun(){
+        cout << "The first space!" << endl;
+    }
+}
+int main(int argc, char* argx[])
+{
+    first_space::fun();
+    return 0;
+}
+```
+- using指令：使用`using namespace`指令，就可以不用在前面加上命名空间的名称。
+```c
+#include<iostream>
+using namespce std;
+namespace first_space{
+    void fun(){
+        cout << "The first space!" << endl;
+    }
+}
+using namespace first_space;
+int main(int argc, char* argx[])
+{
+    fun();
+    return 0;
+}
+```
+### -函数指针&指针函数
+- 函数指针：一种特殊的指针，指向函数的入口，如：
+```c
+/**
+*定义一个函数指针p，指向返回值为int，参数为两个int的函数
+**/
+int (*p)(int,int);
+```
+- 指针函数：返回值为指针的函数，如：
+```c
+/**
+*定义一个函数p，参数为两个int，返回值为指针类型int*
+**/
+int* p(int, int)
+```
+### -重载(overload)、重写(覆盖override)、重定义(隐藏redefining)
+- 重载(overload)：同一可访问区内具有不同参数列表的同名函数，根据参数列表来确定调用哪个函数。
+- 重写(覆盖override)：派生类对基类的虚函数进行重新定义，函数名、返回类型、参数列表必须和基类虚函数相同，只有函数体不同。
+- 重定义(隐藏redefining)：派生类函数屏蔽基类的同名函数，只要函数名相同，不管参数列表是否相同，基类函数都会被隐藏。
 ### -lambda函数
 参考文献：https://www.cnblogs.com/langzou/p/5962033.html
 
@@ -81,11 +135,24 @@ RAII（Resource Acquisition is Initialization）即资源获得初始化，在�
 [RAII思想---利用对象生命周期来控制程序资源](https://blog.csdn.net/Miss_Monster/article/details/89172743) 
 
 [三种智能指针（auto_ptr，unique_ptr，shared_ptr）](https://blog.csdn.net/miss_monster/article/details/89174315)
+## - shared_ptr && make_shared函数
+- shared_ptr是一个标准的共享所有权的智能指针，允许多个指针指向同一个对象，定义在memory文件中。
+- shared_ptr是通过引用计数机制实现的。
+- shared_ptr重载了->和*操作。
+- make_shared函数的主要功能是在动态内存中分配一个对象并初始化它，返回指向此对象的shared_ptr;由于是通过shared_ptr管理内存，这是一种安全分配和使用动态内存的方法。
+
+方法|功能|举例
+:--:|:--:|:--:
+make_shared|创建shared_ptr| `auto ptr = std::make_shared<int>(10);`
+use_count()|参看对象的引用计数|`auto ptr1 = std::make_shared<int>(20);` `auto ptr2 = ptr1; auto ptr3(ptr2); cout << ptr1.use_count() << endl; cout ptr2.use_count() << endl; cout ptr3.use_count() << endl;`
+unique()|判断是否被独占| `cout << ptr1.unique() << endl;`
+reset()|放弃所持有的对象|`ptr2.reset();`
+get()|获取原始指针|`int *ptr4 = ptr1.get();`
 ### - 仿函数
 #### 定义
 仿函数（functor）又称为函数对象（function object）是一个能行使函数功能的类。仿函数的语法几乎和我们普通的函数调用一样，不过作为仿函数的类，都必须重载operator()运算符。
 #### 例子
-```cpp
+```c
 1  class Func{
 2     public:
 3         void operator() (const string& str) const {
@@ -169,6 +236,11 @@ bind的语法格式：
 ```c
 auto newCallable = bind(callable, arg_list); 
 ```
+<<<<<<< HEAD
+### - noexcept
+noexcept修饰符，可以用来修饰函数，在函数后面加上noexcept，代表这个函数不会抛出异常，如果抛出异常程序就会终止。
+=======
+>>>>>>> b15578dde51a6fe44a57dca8c63d310dbb5185ca
 # 2019年8月14日
 ## 1. vscode开发环境配置
 ### 参考文献
@@ -273,7 +345,11 @@ b = a;
 void detach();
 bool joinable() const;
 ```
+<<<<<<< HEAD
+detach是std::thread的成员函数，函数原型如上所示。thread::detach():从thread对象分离执行的线程，允许执行独立地持续。一旦线程退出，则释放所有分配的资源。detach以后就失去了对线程的所有权，不能再调用join了，因为线程已经分离出去了，不再归该实例管了。判断线程是否还有对线程的所有权的一个简单方式是调用joinable函数，返回true则有，否则为无。
+=======
 detach是std::thread的成员函数，函数原型如上所示。detach以后就失去了对线程的所有权，不能再调用join了，因为线程已经分离出去了，不再归该实例管了。判断线程是否还有对线程的所有权的一个简单方式是调用joinable函数，返回true则有，否则为无。
+>>>>>>> b15578dde51a6fe44a57dca8c63d310dbb5185ca
 #### - get_id
 每个线程都有一个id，但此处的get_id与系统分配给线程的ID并不一是同一个东东。如果想取得系统分配的线程ID，可以调用native_handle函数。
 ### (2) [mutex(1)](https://www.jianshu.com/p/96eac2d183b1)
@@ -370,6 +446,93 @@ public:
 一个简单的流程图如下：
 
 ![future and promise flow](20190816191545.png)
+<<<<<<< HEAD
+## 4. [并发指南](https://www.cnblogs.com/haippy/p/3235560.html)
+其他参考文献：[C++11并发指南系列](https://www.cnblogs.com/haippy/p/3284540.html)
+### (1) std::thread构造
+方法 | 描述
+|:--:|:--:|
+default(1)|thread() noexcept
+initialization (2) |template <class Fn, class... Args>  explicit thread (Fn&& fn, Args&&... args);
+copy [deleted] (3)|thread (const thread&) = delete;
+move (4)|thread (thread&& x) noexcept;
+说明：
+- （1）默认构造函数，创建一个空的thread执行对象；
+- （2）初始化构造函数，创建一个 thread对象，该 thread对象可被 joinable，新产生的线程会调用 fn 函数，该函数的参数由 args 给出。
+- （3）拷贝构造函数(被禁用)，意味着 thread 不可被拷贝构造。
+- （4）move 构造函数，move 构造函数，调用成功之后 x 不代表任何 thread 执行对象。
+### （2）future头文件包含的类和函数
+- Providers类：std::promise,std::package_task
+- Futures类：std::future,shared_future
+- Providers函数：async()
+- 其他类型：std::future_error, std::future_errc, std::future_status, std::launch.
+
+std::promise构造函数
+方法|描述
+:--:|:--:
+default(1)|promise();
+with allocator(2)|template <class Alloc> promise (allocator_arg_t aa, const Alloc& alloc);
+copy[deleted]|promise(const promise&)=delete;
+move(4)|promise (promise&& x) noexcept;
+说明：
+- （1）默认构造函数：初始化一个空的共享状态
+- （2）带自定义内存分配器的构造函数，与默认构造函数类似，但是使用自定义分配器分配共享状态
+- （3）拷贝构造函数，被禁用
+- （4）移动构造函数
+### （3）packaged_task
+std::packaged_task对象内部包含了两个最基本的元素，一、被包含的任务（stored task），任务（task）是一个可调用的对象，如函数指针、成员函数指针或者函数对象，二、共享状态（shared state），用于保存任务的返回值，可以通过std::future对象来达到异步访问共享状态的效果。
+可以通过 std::packged_task::get_future 来获取与共享状态相关联的 std::future 对象。在调用该函数之后，两个对象共享相同的共享状态。
+
+std::packaged_task构造函数:
+方法|描述
+:--:|:--:
+default(1)|packaged_task() noexcept;
+initialization(2)|template<class Fn> explicit packaged_task(Fn&& fn);
+with allocator(3)|template<class Fn, class Alloc> explicit packaged_task (allocator_arg_t aa, const Alloc& alloc, Fn&& fn);
+copy [deleted] (4)|packaged_task(const packaged_task&) = delete;
+move(5)|packaged_task(packaged_task&& x) noexcept;
+std::packaged_task::valid:检查当前packaged_task是否和一个有效的共享状态相关联，对于由构造函数生成的packaged_task对象，该函数返回false，除非中间进行move赋值操作或者swap操作。
+### （4）future
+std::future可以用来获取异步任务的结果，因此可以把它当成一种简单的线程间同步的手段。std::future通常由某个Provider创建，你可以把Provider想象成一个异步任务的提供者，Provider在某个线程中设置共享状态的值，与该共享状态相关联的std::future对象调用get（通常在另外一个线程中）获取该值。
+
+一个有效（valid）的std::future对象通常由以下三种Provider创建，并和某个共享状态相关联。
+- std::async函数。
+- std::promise::get_future,get_future为promise类的成员函数。
+- std::packaged_task::get_future,此时get_future为packaged_task的成员函数。
+
+future构造函数
+|方法|描述|
+:--:|:--:
+default(1)|future() noexcept;
+copy [deleted] (2)|future (const future&) = delete;
+move(3)|future (future&& x) noexcept;
+- std::future::share():调用该函数之后，该std::future对象本身已经不和任何共享状态相关联，因此该std::future的状态不再是valid的了。
+- std::future::get:返回Provider所设置的共享状态的值或者异常。
+- std::future::valid()：检查当前的std::future对象是否有效。
+- std::future::wait()/wait_for()/wait_until():等待与该std::future对象相关联的共享状态的标志变为ready。
+- std::shared_future:与std::future类似，但是std::shared_future可以拷贝，多个std::shared_future可以共享状态的最终结果。shared_future可以通过某个std::future对象隐式转换，或者通过std::future::share()显示转换。构造函数如下：
+
+方法|说明
+:--:|:--:
+default(1)|shared_future() noexcept;
+copy(2)|shared_future(const shared_future& x);
+move(3)|shared_future(shared_future&& x) noexcept;
+move from future(4)|shared_future(future<T>&& x) noexcept;
+最后move from future（4）即从一个有效的std::future对象构造成一个std::shared_future，构造之后std::future对象x变为无效（not-valid）。
+### (5)atomic_flag
+< atomic >头文件：原子类型是封装了一个值的类型，它的访问保证不会导致数据的竞争，并且可以用于在不同的线程之间同步内存访问。这个头声明了两个c++类，原子和atomic_flag，它实现了自包含类中的原子类型的所有特性。结构如下：
+class|Introductions  
+:--:|:--:
+atomic| 用于bool、整数和指针类型的原子类模板和特殊化 (类模板)
+atomic_flag|无锁布尔原子类型(类)
+atomic_flag是一种简单的原子布尔型，只支持两种操作，test-and-set和clear。
+std::atomic_flag构造函数如下：
+- atomic_flag() noexcept = default;
+- atomic_flag(const atomic_flag& T) = delete;
+std::atomic_flag只有默认构造函数，拷贝构造函数已被禁用，因此不能从其他的 std::atomic_flag 对象构造一个新的 std::atomic_flag 对象。
+
+=======
+>>>>>>> b15578dde51a6fe44a57dca8c63d310dbb5185ca
 ## 1. tensorflow
 ### (1)安装
 windows环境下安装：>pip install tensorflow 
@@ -379,3 +542,14 @@ windows环境下安装：>pip install tensorflow
 原因：setuptools 版本太低
 
 办法：更新setuptools版本 输入 pip install --upgrade setuptools
+<<<<<<< HEAD
+### (2)基本使用
+- 使用图(graph)来表示计算任务
+- 在被称之为回话(Session)的上下文(context)中执行图
+- 使用tensor表示数据
+- 通过变量(variable)维护状态
+- 使用feed和fetch可以为任意的操作(arbitrary operation)赋值或者从中获取数据
+### (3)参考文献
+- [TensorFlow基本用法](https://www.cnblogs.com/zyly/p/8682794.html)
+=======
+>>>>>>> b15578dde51a6fe44a57dca8c63d310dbb5185ca

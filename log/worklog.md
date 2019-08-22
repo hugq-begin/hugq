@@ -236,11 +236,8 @@ bind的语法格式：
 ```c
 auto newCallable = bind(callable, arg_list); 
 ```
-<<<<<<< HEAD
 ### - noexcept
 noexcept修饰符，可以用来修饰函数，在函数后面加上noexcept，代表这个函数不会抛出异常，如果抛出异常程序就会终止。
-=======
->>>>>>> b15578dde51a6fe44a57dca8c63d310dbb5185ca
 # 2019年8月14日
 ## 1. vscode开发环境配置
 ### 参考文献
@@ -345,11 +342,7 @@ b = a;
 void detach();
 bool joinable() const;
 ```
-<<<<<<< HEAD
 detach是std::thread的成员函数，函数原型如上所示。thread::detach():从thread对象分离执行的线程，允许执行独立地持续。一旦线程退出，则释放所有分配的资源。detach以后就失去了对线程的所有权，不能再调用join了，因为线程已经分离出去了，不再归该实例管了。判断线程是否还有对线程的所有权的一个简单方式是调用joinable函数，返回true则有，否则为无。
-=======
-detach是std::thread的成员函数，函数原型如上所示。detach以后就失去了对线程的所有权，不能再调用join了，因为线程已经分离出去了，不再归该实例管了。判断线程是否还有对线程的所有权的一个简单方式是调用joinable函数，返回true则有，否则为无。
->>>>>>> b15578dde51a6fe44a57dca8c63d310dbb5185ca
 #### - get_id
 每个线程都有一个id，但此处的get_id与系统分配给线程的ID并不一是同一个东东。如果想取得系统分配的线程ID，可以调用native_handle函数。
 ### (2) [mutex(1)](https://www.jianshu.com/p/96eac2d183b1)
@@ -445,12 +438,7 @@ public:
 
 一个简单的流程图如下：
 
-<<<<<<< HEAD
 ![future and promise flow](image/20190816191545.png)
-=======
-![future and promise flow](20190816191545.png)
->>>>>>> 16118042375256aa4b0f96c173d862f01a3f8801
-<<<<<<< HEAD
 ## 4. [并发指南](https://www.cnblogs.com/haippy/p/3235560.html)
 其他参考文献：[C++11并发指南系列](https://www.cnblogs.com/haippy/p/3284540.html)
 ### (1) std::thread构造
@@ -535,8 +523,6 @@ std::atomic_flag构造函数如下：
 - atomic_flag(const atomic_flag& T) = delete;
 std::atomic_flag只有默认构造函数，拷贝构造函数已被禁用，因此不能从其他的 std::atomic_flag 对象构造一个新的 std::atomic_flag 对象。
 
-=======
->>>>>>> b15578dde51a6fe44a57dca8c63d310dbb5185ca
 ## 1. tensorflow
 ### (1)安装
 windows环境下安装：>pip install tensorflow 
@@ -546,7 +532,6 @@ windows环境下安装：>pip install tensorflow
 原因：setuptools 版本太低
 
 办法：更新setuptools版本 输入 pip install --upgrade setuptools
-<<<<<<< HEAD
 ### (2)基本使用
 - 使用图(graph)来表示计算任务
 - 在被称之为回话(Session)的上下文(context)中执行图
@@ -555,5 +540,3 @@ windows环境下安装：>pip install tensorflow
 - 使用feed和fetch可以为任意的操作(arbitrary operation)赋值或者从中获取数据
 ### (3)参考文献
 - [TensorFlow基本用法](https://www.cnblogs.com/zyly/p/8682794.html)
-=======
->>>>>>> b15578dde51a6fe44a57dca8c63d310dbb5185ca

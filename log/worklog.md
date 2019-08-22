@@ -445,7 +445,11 @@ public:
 
 一个简单的流程图如下：
 
+<<<<<<< HEAD
 ![future and promise flow](image/20190816191545.png)
+=======
+![future and promise flow](20190816191545.png)
+>>>>>>> 16118042375256aa4b0f96c173d862f01a3f8801
 <<<<<<< HEAD
 ## 4. [并发指南](https://www.cnblogs.com/haippy/p/3235560.html)
 其他参考文献：[C++11并发指南系列](https://www.cnblogs.com/haippy/p/3284540.html)

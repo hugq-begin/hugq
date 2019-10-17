@@ -5,9 +5,12 @@ Eclipse是跨平台的自由集成开发环境(IDE)。最初主要用作Java语�
 - JDK(Java Development Kit)：Java语言软件开发工具包，共有SE(标准版)、EE(企业版)和ME(精简版)三种版本，此处选择[SE版本](https://www.oracle.com/technetwork/java/javase/downloads/jdk13-downloads-5672538.html)；
 - IDE(Integrated Development Environment)：[Eclipse IDE 2019‑09](https://www.eclipse.org/downloads/packages/release/2019-09/r/eclipse-ide-cc-developers);
 - [MinGW(Minimalist GNUfor Windows)](https://sourceforge.net/projects/mingw-w64/?source=recommended)：C/C++编译器。
+
 ## 3.安装配置
 以下安装配置均在Windows环境下。
+
 ### 3.1. JDK
+
 1. 下载JDK
 点击链接进入下载页面，或者搜索[JDK官网](https://www.oracle.com/)进行下载。
 
